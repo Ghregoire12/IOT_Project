@@ -210,7 +210,7 @@ var myChartAccel = new Chart(ctx, {
 	var reconnectTimeout = 2000;
 	var port = 8000;
 	function MQTTconnect() {
-		mqtt = new Paho.MQTT.Client("172.16.162.80",port,"/mqtt","web_" + parseInt(Math.random() * 100, 10) );
+		mqtt = new Paho.MQTT.Client("broker.hivemq.com",port,"/mqtt","web_" + parseInt(Math.random() * 100, 10) );
 		var options = {
 			timeout: 3,
 			useSSL: false,
@@ -244,8 +244,6 @@ var myChartAccel = new Chart(ctx, {
 		modifyGraph(topic,payload);
 	};
 	function sendMessage(element){
-		console.log(element.value);
-
 		var msg = new Paho.MQTT.Message(element.value);
 		msg.destinationName = "Gregoire/Led";
 		mqtt.send(msg);
